@@ -3,37 +3,40 @@ let ul = document.querySelector('ul')
 let dicesNumberIn = document.getElementById('numberOfDices');
 let diceTypeIn = document.getElementById('diceType');
 let button = document.querySelector('button');
-let image = document.querySelector('img');
+let image = document.getElementsByTagName('img');
 let select =document.querySelector('select');
 
 let dicesNumber;
 let diceType;
 
-
-select.addEventListener('change',function(){
+function diceChange(img){
     switch (diceTypeIn.value) {
         case '4' : 
-            image.src="images/4.png"
+            img.src="images/4.png"
             break;
         case '6' :
-            image.src="images/6.png"
+            img.src="images/6.png"
             break;
         case '8' :
-            image.src="images/8.png"
+            img.src="images/8.png"
             break;
         case '10' :
-            image.src="images/10.png"
+            img.src="images/10.png"
             break;
         case '12' :
-            image.src="images/12.png"
+            img.src="images/12.png"
             break;
         case '20' :
-            image.src="images/20.png"
+            img.src="images/20.png"
             break;
         case '100' :
-            image.src="images/100.png"
+            img.src="images/100.png"
             break;
     }  
+}
+
+select.addEventListener('change',function(){
+    diceChange(image[0]);
 })
     
 button.addEventListener('click',function(){
@@ -47,7 +50,12 @@ button.addEventListener('click',function(){
         let roll = Math.ceil(Math.random() * diceType);
 
         let li = document.createElement('li');
-        li.innerText = roll;
+        let imageLi = document.createElement('img');
+        diceChange(imageLi);
+        imageLi.style='height:35px';
+        
+        li.innerText =  roll;
+        li.appendChild(imageLi);
         ul.appendChild(li);
     }
 })
